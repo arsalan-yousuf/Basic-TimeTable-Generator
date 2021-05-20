@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Time-Table Generator</title>
+    <link href="style.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+    <h2>Time-Table Generator</h2>
+    <fieldset>
+        <legend>Add</legend>
+        <form action="#" onsubmit="return addTeacher();">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" required>
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" required><br>
+            Gender: <label><input type="radio" name="gender" value="Male">Male</label>
+            <label><input type="radio" name="gender" value="Female">Female</label>
+            <label for="post">Type:</label>
+            <select name="type" id="post">
+                <option value="">-- Select Type --</option>
+                <option value="Assosiate Professor">Assosiate Professor</option>
+                <option value="Assistant Professor">Assistant Professor</option>
+                <option value="Lecturer">Lecturer</option>
+            </select><br>
+            <button type="submit">Add</button>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Assign</legend>
+        <form action="javascript:void(0);" onsubmit="updateTeacher();" id="toTeacher">
+
+            <label for="selteacher">Select Teacher:</label>
+            <select name="teacher" id="selteacher" onchange="checkLoad();">
+                <option value="">-- Select Teacher --</option>
+            </select><br>
+            <hr>
+            <b>Course 1 </b><label for="bclass1">Program:</label>
+            <select name="class" id="bclass1" onchange="updateList('sub1','bclass1');">
+                <option value="no">-- Select Program --</option>
+                <option value="bscs1">BSCS I</option>
+                <option value="bscs2">BSCS II</option>
+                <option value="bscs3">BSCS III</option>
+                <option value="bscs4">BSCS IV</option>
+                <option value="bsse1">BSSE I</option>
+                <option value="bsse2">BSSE II</option>
+                <option value="bsse3">BSSE III</option>
+                <option value="bsse4">BSSE IV</option>
+                <option value="mcsp">MCS Prev.</option>
+                <option value="mcsf">MCS Final</option>
+            </select>
+            <label for="sub1">Course:</label>
+            <select name="course" id="sub1" onchange="checkAssigned('sub1');">
+                <option value="">-- Select Course --</option>
+            </select>
+            <hr>
+            <b>Course 2 </b><label for="bclass2">Program:</label>
+            <select name="class" id="bclass2" onchange="updateList('sub2','bclass2');">
+                <option value="no">-- Select Program --</option>
+                <option value="bscs1">BSCS I</option>
+                <option value="bscs2">BSCS II</option>
+                <option value="bscs3">BSCS III</option>
+                <option value="bscs4">BSCS IV</option>
+                <option value="bsse1">BSSE I</option>
+                <option value="bsse2">BSSE II</option>
+                <option value="bsse3">BSSE III</option>
+                <option value="bsse4">BSSE IV</option>
+                <option value="mcsp">MCS Prev.</option>
+                <option value="mcsf">MCS Final</option>
+            </select>
+            <label for="sub2">Course:</label>
+            <select name="course" id="sub2" onchange="checkAssigned('sub2');">
+                <option value="">-- Select Course --</option>
+            </select>
+            <hr>
+            <b>Course 3 </b><label for="bclass3">Program:</label>
+            <select name="class" id="bclass3" onchange="updateList('sub3','bclass3');">
+                <option value="no">-- Select Program --</option>
+                <option value="bscs1">BSCS I</option>
+                <option value="bscs2">BSCS II</option>
+                <option value="bscs3">BSCS III</option>
+                <option value="bscs4">BSCS IV</option>
+                <option value="bsse1">BSSE I</option>
+                <option value="bsse2">BSSE II</option>
+                <option value="bsse3">BSSE III</option>
+                <option value="bsse4">BSSE IV</option>
+                <option value="mcsp">MCS Prev.</option>
+                <option value="mcsf">MCS Final</option>
+            </select>
+            <label for="sub3">Course:</label>
+            <select name="course" id="sub3" onchange="checkAssigned('sub3');">
+                <option value="">-- Select Course --</option>
+            </select>
+            <hr>
+            <button type="submit" >Update</button>
+        </form>
+    </fieldset>
+    <fieldset>
+        <legend>Schedule</legend>
+        <form action="#" onsubmit="schedule();">
+            <label for="selteacher2">Select Teacher:</label>
+            <select name="teacher" id="selteacher2" onchange="updateAssignedList();">
+                <option value="">-- Select Teacher --</option>
+            </select><br>
+            <label for="courseAssigned">Course:</label>
+            <select id="courseAssigned">
+                <option value="">-- Select Course --</option>
+            </select>
+            <label for="day1">Day:</label>
+                <select name="day" id="day1">
+                    <option value="">-- Select Day --</option>
+                    <option value="Monday">Monday</option>
+                    <option value="Tuesday">Tuesday</option>
+                    <option value="Wednesday">Wednesday</option>
+                    <option value="Thursday">Thursday</option>
+                    <option value="Friday">Friday</option>
+                </select>
+                <label for="slot1">Time Slot:</label>
+                <select name="time" id="slot1" onchange="checkSlot();">
+                    <option value="">-- Select Time Slot --</option>
+                    <option value="09:00-10:40">09:00 - 10:40</option>
+                    <option value="11:00-12:50">11:00 - 12:50</option>
+                    <option value="01:50-03:30">01:50 - 03:30</option>
+                </select><br>
+                <button type="submit">Schedule</button>
+        </fieldset>
+        </form>
+
+        <label for="bclass4"><b>View TimtTable </b> Program:</label>
+        <select name="class" id="bclass4" onchange="updateTable();">
+            <option value="no">-- Select Program --</option>
+            <option value="bscs1">BSCS I</option>
+                <option value="bscs2">BSCS II</option>
+                <option value="bscs3">BSCS III</option>
+                <option value="bscs4">BSCS IV</option>
+                <option value="bsse1">BSSE I</option>
+                <option value="bsse2">BSSE II</option>
+                <option value="bsse3">BSSE III</option>
+                <option value="bsse4">BSSE IV</option>
+                <option value="mcsp">MCS Prev.</option>
+                <option value="mcsf">MCS Final</option>
+        </select>  
+        
+        <table cellpadding="10" cellspacing="0" border="1">
+            <tr>
+                <td><h3 id="bclassRow"></h3></td>
+            </tr>
+            <tr>
+                <th>Timings</th>
+                <th>09:00-10:40</th>
+                <th>11:00-12:50</th>
+                <th></td>
+                <th>01:50-03:30</th>
+            </tr>
+            <tr id="Monday">
+                <th>Monday</th>
+                <td class="09:00-10:40"></td>
+                <td class="11:00-12:50"></td>
+                <th>B</th>
+                <td class="01:50-03:30"></td>
+            </tr>
+            <tr id="Tuesday">
+                <th>Tuesday</th>
+                <td class="09:00-10:40"></td>
+                <td class="11:00-12:50"></td>
+                <th>R</th>
+                <td class="01:50-03:30"></td>
+            </tr>
+            <tr id="Wednesday">
+                <th>Wednesday</th>
+                <td class="09:00-10:40"></td>
+                <td class="11:00-12:50"></td>
+                <th>E</th>
+                <td class="01:50-03:30"></td>
+            </tr>
+            <tr id="Thursday">
+                <th>Thursday</th>
+                <td class="09:00-10:40"></td>
+                <td class="11:00-12:50"></td>
+                <th>A</th>
+                <td class="01:50-03:30"></td>
+            </tr>
+            <tr id="Friday">
+                <th>Friday</th>
+                <td class="09:00-10:40"></td>
+                <td class="11:00-12:50"></td>
+                <th>K</th>
+                <td class="01:50-03:30"></td>
+            </tr>
+        </table>
+</body>
+<script>  
+    alert("Read Instruction File Before Using Application");   
+    var teachers=[];
+    if(JSON.parse(localStorage.getItem("teachers")!==null))
+    {
+    teachers=JSON.parse(localStorage.getItem("teachers"));
+    }
+    function setTeacherList(listId)
+    {
+    var sel=document.getElementById(listId);
+    for(var i=0;i<teachers.length;i++)
+    {
+    var toption=document.createElement("option");
+    toption.innerText=teachers[i].fullName;
+    toption.setAttribute("value",teachers[i].fullName);
+    sel.appendChild(toption);
+    }
+    }
+    setTeacherList("selteacher");
+    setTeacherList("selteacher2");
+    var twoPlusOne=["BSCS-301","BSCS-305","BSCS-307",
+                    "BSCS-401","BSCS-403","BSCS-409","BSCS-413",
+                    "BSCS-501","BSCS-503","BSCS-507","BSCS-509","BSCS-511","BSCS-515",
+                    "BSCS-611","BSCS-613","BSCS-631","BSCS-633",
+                    "CSSE-303","CSSE-305","CSSE-313",
+                    "CSSE-403","CSSE-405","CSSE-415",
+                    "CSSE-501","CSSE-507","CSSE-509",
+                    "BSSE-603","BSSE-605",
+                    "CS-501","CS-503","CS-505","CS-509","CS-507",
+                    "CS-601","CS-603","CS-613","CS-619","CS-623"];
+    
+    var threePlusZero=["BSCS-303","BSCS-309","BSCS-311","BSCS-313",
+                        "BSCS-405","BSCS-411",
+                        "BSCS-607","BSCS-621",
+                        "CSSE-301","CSSE-307","CSSE-311",
+                        "CSSE-411","CSSE-413","CSSE-417",
+                        "CSSE-503","CSSE-505","CSSE-511",
+                        "BSSE-601","BSSE-607","BSSE-611",];
+
+    function Create(a,b,c,d,e)
+    {
+        this.firstName=a;
+        this.lastName=b;
+        this.fullName=a+" "+b;
+        this.gender=c;
+        this.post=d;
+        this.codeName=a[0]+b[0];
+        this.capacity=e;
+        this.load=0;
+        this.courses=[];
+    }
+    function AddCourse(a,b,c)
+    {
+        this.class=a;
+        this.courseCode=b;
+        this.creditHrs=c;
+        this.day=undefined;
+        this.slot=undefined;
+    }
+    function addTeacher()
+    {
+        var formsub=false,cap;
+        // Gender Selectiion validation
+        var gend=document.getElementsByName("gender");
+        for(var i=0;i<gend.length;i++)
+        {
+            if(gend[i].checked)
+            {
+                gend=gend[i].value;
+                formsub=true;
+                break;
+            }
+        }
+        if(!formsub)
+        {
+            alert("Kindly select gender");
+            return false;
+        }
+        //teacher type validation
+        var posit=document.getElementById("post");
+        if(posit.selectedIndex===0)
+        {
+            alert("Kindly select teacher type");
+            posit.focus();
+            return false;
+        }
+        else
+        {
+            posit=posit.value;
+            if(posit==="Assosiate Professor")
+            {
+                cap=12;
+            }
+            else
+            {
+                cap=18;
+            }
+        }
+        var fname=document.getElementById("fname").value;
+        var lname=document.getElementById("lname").value;
+        teachers.push(new Create(fname,lname,gend,posit,cap));
+        localStorage.clear();
+        localStorage.setItem("teachers",JSON.stringify(teachers));
+        window.location.reload();
+        alert("Teacher added successfully");
+    }
+    function updateList(subject,bsclass)
+    {
+        var subList=document.getElementById(subject);
+        var cList=document.getElementById(bsclass);
+        switch(cList.value)
+        {
+            case "no":
+            {
+                subList.innerHTML=`<option value='no'>-- Select Program --</option>`
+                break;
+            }
+            case "bscs1":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="BSCS-301">BSCS-301 ICS (2+1)</option>
+                <option value="BSCS-303">BSCS-303 CAL (3+0)</option>
+                <option value="BSCS-305">BSCS-305 SDA (2+1)</option>
+                <option value="BSCS-307">BSCS-307 GP-1 (2+1)</option>
+                <option value="BSCS-309">BSCS-309 ENG (3+0)</option>
+                <option value="BSCS-311">BSCS-311 ISL (3+0)</option>
+                <option value="BSCS-313">BSCS-313 PST (3+0)</option>   `
+                break;
+            }
+            case "bscs2":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="BSCS-401">BSCS-401 DCDF (2+1)</option>
+                <option value="BSCS-403">BSCS-403 ALP (2+1)</option>
+                <option value="BSCS-405">BSCS-405 LA (3+0)</option>
+                <option value="BSCS-409">BSCS-409 MSCD (2+1)</option>
+                <option value="BSCS-411">BSCS-411 DM (3+0)</option>
+                <option value="BSCS-413">BSCS-413 OOP (2+1)</option>   `
+                break;
+            }
+            case "bscs3":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="BSCS-501">BSCS-501 ToCS (2+1)</option>
+                <option value="BSCS-503">BSCS-503 DCN-1 (2+1)</option>
+                <option value="BSCS-507">BSCS-507 OR (2+1)</option>
+                <option value="BSCS-509">BSCS-509 DBMS (2+1)</option>
+                <option value="BSCS-511">BSCS-511 CAO (2+1)</option>
+                <option value="BSCS-515">BSCS-515 AI (2+1)</option>    `
+                break;
+            }
+            case "bscs4":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="BSCS-607">BSCS-607 FA (3+0)</option>
+                <option value="BSCS-611">BSCS-611 PC (2+1)</option>
+                <option value="BSCS-613">BSCS-613 MIS (2+1)</option>
+                <option value="BSCS-621">BSCS-621 TOCI (3+0)</option>
+                <option value="BSCS-631">BSCS-631 NSC (2+1)</option>
+                <option value="BSCS-633">BSCS-633 IAD (2+1)</option>    `
+                break;
+            }
+            case "bsse1":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="CSSE-301">CSSE-301 CAG (3+0)</option>
+                <option value="CSSE-303">CSSE-303 CLD (2+1)</option>
+                <option value="CSSE-305">CSSE-305 ICSCL (2+1)</option>
+                <option value="CSSE-307">CSSE-307 IS-E (3+0)</option>
+                <option value="CSSE-311">CSSE-311 ENG (3+0)</option>
+                <option value="CSSE-313">CSSE-313 ISE (2+1)</option>    `
+                break;
+            }
+            case "bsse2":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="CSSE-403">CSSE-403 RDBMS (2+1)</option>
+                <option value="CSSE-405">CSSE-405 DSA (2+1)</option>
+                <option value="CSSE-411">CSSE-411 ODE (3+0)</option>
+                <option value="CSSE-413">CSSE-413 AT (3+0)</option>
+                <option value="CSSE-415">CSSE-415 SD (2+1)</option>
+                <option value="CSSE-417">CSSE-417 P&S (3+0)</option>    `
+                break;
+            }
+            case "bsse3":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="CSSE-501">CSSE-501 CC (2+1)</option>
+                <option value="CSSE-503">CSSE-503 CA (3+0)</option>
+                <option value="CSSE-505">CSSE-505 OB (3+0)</option>
+                <option value="CSSE-507">CSSE-507 NDC (2+1)</option>
+                <option value="CSSE-509">CSSE-509 AI (2+1)</option>
+                <option value="CSSE-511">CSSE-511 NA (3+0)</option>    `
+                break;
+            }
+            case "bsse4":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="BSSE-601">BSSE-601 DC (3+0)</option>
+                <option value="BSSE-603">BSSE-603 SPM (2+1)</option>
+                <option value="BSSE-605">BSSE-605 CA (2+1)</option>
+                <option value="BSSE-607">BSSE-607 TOCI-2 (3+0)</option>
+                <option value="BSSE-611">BSSE-611 P-1 (3+0)</option>   `
+                break;
+            }
+            case "mcsp":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="CS-501">CS-501 FDC (2+1)</option>
+                <option value="CS-503">CS-503 SM (2+1)</option>
+                <option value="CS-505">CS-505 NC-1 (2+1)</option>
+                <option value="CS-509">CS-509 PL (2+1)</option>
+                <option value="CS-507">CS-507 LP (2+1)</option>    `
+                break;
+            }
+            case "mcsf":
+            {
+                subList.innerHTML=
+                `<option value="">-- Select Course --</option>
+                <option value="CS-601">CS-601 DB (2+1)</option>
+                <option value="CS-603">CS-603 OR (2+1)</option>
+                <option value="CS-613">CS-613 OS (2+1)</option>
+                <option value="CS-619">CS-619 MA (2+1)</option>
+                <option value="CS-623">CS-623 DSAA (2+1)</option>    `
+                break;
+            }
+        }
+    }
+    function checkLoad()
+    {
+        var t=document.getElementById("selteacher");
+        if(t.selectedIndex!==0)
+        {
+        var tload=teachers[t.selectedIndex-1].load;
+        var tcap=teachers[t.selectedIndex-1].capacity;
+        if(tload>=tcap)
+        {
+            alert("Teacher full loaded");
+            window.location.reload();
+        }
+        }
+    }
+    function checkAssigned(a)
+    {
+        var courseToCheck=document.getElementById(a);
+        for(var i=0;i<teachers.length;i++)
+        {       
+            for(var j=0;j<teachers[i].courses.length;j++)
+            {
+                if(typeof(teachers[i].courses[j])==="object")
+                    {
+                    if(teachers[i].courses[j].courseCode===courseToCheck.value)
+                    {
+                        alert(courseToCheck.value + " already assigned to " + teachers[i].fullName);
+                        courseToCheck.selectedIndex=0;
+                        courseToCheck.focus();
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    function updateTeacher()
+    {   
+        var selectedTeacher,array=[];
+        var t=document.getElementById("selteacher");
+        if(t.selectedIndex===0)
+        {
+            alert("Select any teacher");
+            window.location.reload();
+        }
+        else
+        {
+            selectedTeacher=teachers[t.selectedIndex-1];
+            var bclass,subj,count=0,creditConsumed,creditHours;
+            for(var i=1;i<4;i++)
+            {
+                bclass=document.getElementById("bclass"+i);
+                if(bclass.selectedIndex!==0)
+                {
+                    bclass=bclass.value;
+                    // assigning course
+                    var subj=document.getElementById("sub"+i);
+                    if(subj.selectedIndex!==0)
+                    {
+                        if(array.indexOf(subj.value)!==-1)
+                        {
+                            alert(subj.value+ " already assigned to "+selectedTeacher.fullName);
+                            continue;
+                        }
+                        subj=subj.value;
+                        array.push(subj);
+                        if(threePlusZero.indexOf(subj)!==-1)
+                        {
+                            creditHours="(3+0)"
+                            creditConsumed=3;
+                        }
+                        else
+                        {
+                            creditHours="(2+1)";
+                            creditConsumed=6;
+                        }
+                        if(selectedTeacher.load+creditConsumed<=selectedTeacher.capacity)
+                        {
+                        selectedTeacher.courses.push(new AddCourse(bclass,subj,creditHours));
+                        alert(subj + " assigned to " + selectedTeacher.fullName + " successfully");
+                        selectedTeacher.load+=creditConsumed;
+                        window.location.reload();
+                        }
+                        else{
+                            alert("Teacher getting overloaded");
+                        }
+                    }
+                    else
+                    {
+                        subj.focus();
+                        alert("Select any course");
+                    }
+                }
+                else
+                {
+                    count++;
+                }
+                if(count>=3)
+                {
+                    alert("No course assigned");
+                }
+            }
+            localStorage.clear();
+            localStorage.setItem("teachers",JSON.stringify(teachers));
+            array.cl
+        }
+    }
+    function updateAssignedList()
+    {
+        var T=document.getElementById("selteacher2");
+        var assignedTeacher;
+        for(var i=0;i<teachers.length;i++)
+        {
+            if(teachers[i].fullName===T.value)
+            {
+                assignedTeacher=teachers[i];
+            }
+        }
+        var list = document.getElementById("courseAssigned");
+        list.innerHTML='<option value="">-- Select Course --</option>'
+        for(var i=0;i<assignedTeacher.courses.length;i++)
+        {
+            var opt=document.createElement("option");
+            opt.innerText=assignedTeacher.courses[i].courseCode +"\t"+ assignedTeacher.courses[i].creditHrs;
+            opt.setAttribute("value",assignedTeacher.courses[i].courseCode);
+            list.appendChild(opt);
+        }
+    }
+    function schedule()
+    {
+        teacherTo=document.getElementById("selteacher2");
+        var courseTo=document.getElementById("courseAssigned");
+        timeTo=document.getElementById("slot1");
+        dayTo=document.getElementById("day1");
+        if(teacherTo.selectedIndex!==0)
+        {
+            teacherTo=teachers[teacherTo.selectedIndex-1];
+            if(courseTo.selectedIndex!==0)
+            {
+                courseTo=courseTo.value;
+                if(dayTo.selectedIndex!==0)
+                {
+                    dayTo=dayTo.value;
+                    if(timeTo.selectedIndex!==0)
+                    {
+                        timeTo=timeTo.value;
+                        for(var i=0;i<teachers.length;i++)
+                        {
+                            if(teachers[i]===teacherTo)
+                            {
+                            for(var j=0;j<teachers[i].courses.length;j++)
+                            {
+                                if(teachers[i].courses[j].courseCode===courseTo)
+                                {
+                                    teachers[i].courses[j].day=dayTo;
+                                    teachers[i].courses[j].slot=timeTo;
+                                    console.log(teachers[i]);
+                                    localStorage.clear();
+                                    localStorage.setItem("teachers",JSON.stringify(teachers));
+                                    alert(courseTo + " scheduled on "+dayTo+" in slot "+timeTo);
+
+                                }
+
+                            }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        alert("Time slot not selected");
+                    }
+                }
+                else
+                {
+                    alert("Day not selected");
+                }
+            }
+            else
+            {
+                alert("course not selected");
+            }
+        }
+        else
+        {
+            alert("Teacher not selected");
+        }
+    }
+    function checkSlot()
+    {
+        var timeSlot=document.getElementById("slot1");
+        var courseDay=document.getElementById("day1");
+        var checkTeacher=teachers[document.getElementById("selteacher2").selectedIndex-1];
+        var courseField=document.getElementById("courseAssigned");
+        var checkBclass=checkTeacher.courses[courseField.selectedIndex-1].class;
+        var alreayOccupied=false;
+        for(var i=0;i<checkTeacher.courses.length;i++)
+        {
+            if(typeof(checkTeacher.courses[i])==="object")
+            {
+                if(checkTeacher.courses[i].slot===timeSlot.value && checkTeacher.courses[i].day===courseDay.value)
+                {
+                    alert("Time slot already occupied by you for "+checkTeacher.courses[i].courseCode);
+                    timeSlot.selectedIndex=0;
+                    alreayOccupied=true;
+                    break;
+                }
+            }
+        }
+        if(!alreayOccupied)
+        {
+            for(var i=0;i<teachers.length;i++)
+            {
+                for(var j=0;j<teachers[i].courses.length;j++)
+                {
+                    if(typeof(teachers[i].courses[j])==="object")
+                    {
+                        if(teachers[i].courses[j].class===checkBclass)
+                        {
+                            if(teachers[i].courses[j].day===courseDay.value && teachers[i].courses[j].slot===timeSlot.value)
+                            {
+                                alert("Already occupied by for "+teachers[i].courses[j].courseCode);
+                                timeSlot.selectedIndex=0;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    function updateTable()
+    {
+        var tableTd=document.getElementsByTagName("td");
+        for(var i=0;i<tableTd.length;i++)
+        {
+            tableTd[i].innerText="";
+        }
+        var tableTo=document.getElementById("bclass4");
+        tableTd[0].innerHTML="<b><i>"+tableTo[tableTo.selectedIndex].innerText+"</i></b>";
+        var row,unit,unitSlot;
+        for(var i=0;i<teachers.length;i++)
+        {
+            for(var j=0;j<teachers[i].courses.length;j++)
+            {
+                if(typeof(teachers[i].courses[j])==="object")
+                {
+                    if(teachers[i].courses[j].day!==undefined)
+                    {
+                        if(teachers[i].courses[j].class===tableTo.value)
+                        {
+                            unit=teachers[i].courses[j];
+                            row=document.getElementById(unit.day);
+                            if(teachers[i].courses[j].slot==="09:00-10:40")
+                            {
+                                unitSlot=row.children[1];
+                            }
+                            else if(teachers[i].courses[j].slot==="11:00-12:50")
+                            {
+                                unitSlot=row.children[2];
+                            }
+                            else if(teachers[i].courses[j].slot==="01:50-03:30")
+                            {
+                                unitSlot=row.children[4];
+                            }
+                            unitSlot.innerText=unit.courseCode+" ("+teachers[i].codeName+")";
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+    
+
+</script>
+</html>

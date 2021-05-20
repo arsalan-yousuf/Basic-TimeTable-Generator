@@ -1,0 +1,7 @@
+As the application uses local storage to store data, therefore you have to follow the steps below so that the application can store data in your pc's local storage.
+
+Steps to use application:
+1. Add Teachers first, the added teacher will appear in the dropdown list below.
+2. Assign courses to teacher, an alert message will be shown when teacher is getting over loaded.
+3. In the third box select the teacher and schedule his/her classes.
+4. ln the last dropdown select any class to view it's time table.

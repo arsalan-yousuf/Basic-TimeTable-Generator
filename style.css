@@ -1,0 +1,61 @@
+body
+{
+    font-family: Lato;
+    padding: 10px;
+}
+h2
+{
+    text-align: center;
+}
+fieldset
+{
+    width: 650px;
+    border-radius: 5px;
+    background: whitesmoke;
+    margin-bottom: 10px;
+}
+legend
+{
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    width: 70px;
+    background:white;
+}
+input
+{
+    margin: 5px;
+    padding: 3px;
+    border-radius: 5px;
+}
+select
+{
+    padding: 3px;
+    border-radius: 5px;
+    margin: 5px;
+    margin-left: 3px;
+    width: 145px;
+}
+label
+{
+    margin-left: 3px;
+}
+td
+{
+    width: 200px;
+    text-align: center;
+}
+table
+{
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+button
+{
+    padding: 5px;
+    border-radius: 5px;
+    background: cadetblue;
+    color: whitesmoke;
+    width: 80px;
+    font-weight: bold;
+}
